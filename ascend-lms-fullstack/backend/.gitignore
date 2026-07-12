@@ -1,0 +1,9 @@
+node_modules/
+.env
+logs/*.log
+src/uploads/*
+!src/uploads/.gitkeep
+!src/uploads/profiles/.gitkeep
+!src/uploads/assignments/.gitkeep
+!src/uploads/thumbnails/.gitkeep
+coverage/
