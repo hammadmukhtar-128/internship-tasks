@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /*
+   * System font stacks are used instead of next/font or @font-face Google
+   * Fonts fetches, so the project builds identically everywhere. Swap in
+   * Inter (sans) + Fraunces (display) via Google Fonts or self-hosted files
+   * for the exact pairing used in the original design mock.
+   */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, ui-sans-serif, sans-serif;
+  --font-display: Georgia, "Iowan Old Style", "Palatino Linotype", "URW Palladio L",
+    P052, ui-serif, serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-sand-50 text-brand-950 antialiased;
+  font-family: var(--font-sans);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.container-clinic {
+  @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-10;
+}
+
+.focus-ring {
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
