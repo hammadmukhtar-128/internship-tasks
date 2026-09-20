@@ -19,7 +19,10 @@ import settingsRoutes from "./routes/settingsRoutes.js";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:5173";
+const configuredFrontendUrl = (process.env.FRONTEND_URL || "http://localhost:5173").trim();
+const FRONTEND_URL = /^https?:\/\//i.test(configuredFrontendUrl)
+  ? configuredFrontendUrl.replace(/\/+$/, "")
+  : `https://${configuredFrontendUrl.replace(/\/+$/, "")}`;
 
 // --- Security & parsing middleware ---
 app.use(helmet());
