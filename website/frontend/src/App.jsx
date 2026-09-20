@@ -4,6 +4,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 import MobileCtaBar from "./components/layout/MobileCtaBar";
+import Button from "./components/common/Button";
 import ProtectedRoute from "./components/admin/ProtectedRoute";
 import AdminLayout from "./components/admin/AdminLayout";
 
