@@ -66,6 +66,8 @@ app.use("/api/settings", settingsRoutes);
 app.use(notFoundHandler);
 app.use(errorHandler);
 
+export default app;
+
 async function start() {
   await connectDB();
   app.listen(PORT, () => {
@@ -74,4 +76,6 @@ async function start() {
   });
 }
 
-start();
+if (!process.env.VERCEL) {
+  start();
+}
