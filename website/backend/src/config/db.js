@@ -4,10 +4,7 @@ export async function connectDB() {
   const uri = process.env.MONGODB_URI;
 
   if (!uri) {
-    console.error(
-      "MONGODB_URI is not set. Add it to backend/.env before starting the server."
-    );
-    process.exit(1);
+    throw new Error("MONGODB_URI is not configured.");
   }
 
   try {
@@ -15,7 +12,7 @@ export async function connectDB() {
     console.log("MongoDB connected:", mongoose.connection.host);
   } catch (err) {
     console.error("MongoDB connection failed:", err.message);
-    process.exit(1);
+    throw err;
   }
 
   mongoose.connection.on("error", (err) => {

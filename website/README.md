@@ -33,6 +33,19 @@ npm run dev
 - Backend API: http://localhost:5000/api
 - Admin login: http://localhost:5173/admin/login
 
+## Vercel deployment
+
+Deploy `frontend/` and `backend/` as separate Vercel projects, using each
+folder as its project's root directory. Add these environment variables:
+
+- Frontend: `VITE_API_URL=https://<backend-project>.vercel.app/api`
+- Backend: `MONGODB_URI`, `JWT_SECRET`, `ADMIN_EMAIL`, `ADMIN_PASSWORD_HASH`,
+  and `FRONTEND_URL=https://<frontend-project>.vercel.app`
+
+The included `frontend/vercel.json` preserves client-side routes such as
+`/admin/login` on refresh. The included `backend/vercel.json` runs the Express
+API as a Vercel function and initializes MongoDB on the first request.
+
 Each app also runs completely independently — `cd backend && npm run dev` or
 `cd frontend && npm run dev` work exactly as if the other didn't exist. The
 root `package.json` just wraps both with [concurrently](https://www.npmjs.com/package/concurrently)

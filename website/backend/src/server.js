@@ -23,6 +23,7 @@ const configuredFrontendUrl = (process.env.FRONTEND_URL || "http://localhost:517
 const FRONTEND_URL = /^https?:\/\//i.test(configuredFrontendUrl)
   ? configuredFrontendUrl.replace(/\/+$/, "")
   : `https://${configuredFrontendUrl.replace(/\/+$/, "")}`;
+let databaseConnection;
 
 // --- Security & parsing middleware ---
 app.use(helmet());
@@ -34,6 +35,19 @@ app.use(
 );
 app.use(express.json({ limit: "100kb" }));
 app.use(cookieParser());
+
+if (process.env.VERCEL) {
+  app.use(async (_req, _res, next) => {
+    try {
+      databaseConnection ??= connectDB();
+      await databaseConnection;
+      next();
+    } catch (err) {
+      databaseConnection = undefined;
+      next(err);
+    }
+  });
+}
 
 if (process.env.NODE_ENV !== "production") {
   app.use(morgan("dev"));
